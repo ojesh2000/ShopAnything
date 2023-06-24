@@ -5,7 +5,7 @@
     <body>
         <%- include('../includes/navigation.ejs') , {isAuthenticated: isAuthenticated} %>
         <main>
-            <h3>Total Price : $<%=totalPrice%></h3>
+            <h3>Total Price : ₹<%=totalPrice%></h3>
             <% if(products.length > 0){ %>
                 <div class="grid">
                 <%for(p of products){%>
@@ -20,7 +20,7 @@
                             </div>
                             <div class="card__content">
                                 <h2 class="product__price">
-                                    $ <%= p.price %>
+                                    ₹ <%= p.price %>
                                 </h2>
                             </div>
                             <div class="card__content">

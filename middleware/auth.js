@@ -1,20 +1,14 @@
 const jwt = require('jsonwebtoken');
 
 const getToken = (req) => {
-  if(req.get('Cookie') === null)return null;
-  let cookies = req.get('Cookie').split('=');
+  if(req.get('Cookie') === null){
+    return null;
+  }
+  let cookies = req.get('Cookie').split(';');
   for(let i = 0;i < cookies.length;++i){
-    if(cookies[i] === 'token'){
-      let token = '';
-      for(let j = 0;j < cookies[i + 1].length;++j){
-        if(cookies[i + 1][j] === ';'){
-          break ;
-        }
-        else{
-          token += cookies[i + 1][j];
-        }
-      }
-      return token;
+    cookies[i] = cookies[i].trim();
+    if(cookies[i].split('=')[0] === 'token'){
+      return cookies[i].split('=')[1];
     }
   }
   return null;

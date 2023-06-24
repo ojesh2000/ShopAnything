@@ -11,12 +11,12 @@
                         <li class="orders__item">
                             <div class="details">
                                 <h1 style="display: inline;">Order ID : <%= o.id %></h1>
-                                <h1 style="display: inline;">Total Price: $<%=o.totalPrice%></h1>
+                                <h1 style="display: inline;">Total Price: ₹<%=o.totalPrice%></h1>
                                 <a href="/invoice/<%=o.id%>">Invoice</a>
                                 <ul class="orders__products">
                                     <%o.products.forEach((p) => { %>
                                         <li class="orders__products-item">
-                                            Product: <%=p.title%> , Quantity: <%=p.qty%> , Price: $<%=p.price%>
+                                            Product: <%=p.title%> , Quantity: <%=p.qty%> , Price: ₹<%=p.price%>
                                         </li>
                                     <%})%>
                                 </ul>
