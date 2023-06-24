@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="css/order.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') , {isAuthenticated: isAuthenticated} %>
+        <main>
+            <%if(orders.length > 0){%>
+                <ul class="orders">
+                    <%for(let o of orders){%>
+                        <li class="orders__item">
+                            <div class="details">
+                                <h1 style="display: inline;">Order ID : <%= o.id %></h1>
+                                <h1 style="display: inline;">Total Price: $<%=o.totalPrice%></h1>
+                                <a href="/invoice/<%=o.id%>">Invoice</a>
+                                <ul class="orders__products">
+                                    <%o.products.forEach((p) => { %>
+                                        <li class="orders__products-item">
+                                            Product: <%=p.title%> , Quantity: <%=p.qty%> , Price: $<%=p.price%>
+                                        </li>
+                                    <%})%>
+                                </ul>
+                            </div>
+                        </li>
+                    <%}%>
+                </ul>
+            <%} else {%>
+                <h1>Nothing there!</h1>
+            <%}%>
+        </main>
+        <%- include('../includes/end.ejs') %>
