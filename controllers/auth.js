@@ -5,7 +5,7 @@ const User = require('../models/user.js');
 const { validationResult } = require('express-validator');
 
 const getToken = (req) => {
-  if(req.get('Cookie') === null){
+  if(!req.get('Cookie')){
     return null;
   }
   let cookies = req.get('Cookie').split(';');
@@ -71,7 +71,7 @@ exports.postLogin = async (req, res, next) => {
     username: req.body.username,
     email: req.body.email,
   } , 'secret' , {  expiresIn: '2h' });
-  res.setHeader('Set-Cookie' , `token=${token}; Max-Age=25200 HttpOnly`);
+  res.setHeader('Set-Cookie' , `token=${token}; Max-Age=25200; HttpOnly`);
   res.redirect('/');
 };
 
@@ -97,12 +97,12 @@ exports.postSignup = async (req, res, next) => {
     username: req.body.username,
     email: req.body.email,
   } , 'secret' , {expiresIn: '2h'});
-  res.setHeader('Set-Cookie' , `token=${token}; Max-Age=25200 HttpOnly`);
+  res.setHeader('Set-Cookie' , `token=${token}; Max-Age=25200; HttpOnly`);
   const added = await User.addUser(req.body.username , encryptedPassword , req.body.email);
   res.redirect('/');
 };
 
 exports.postLogout = (req, res, next) => {
-  res.setHeader('Set-Cookie' , 'token=deleted; Max-Age=0 HttpOnly');
+  res.setHeader('Set-Cookie' , 'token=deleted; Max-Age=0; HttpOnly');
   res.redirect('/');
 };

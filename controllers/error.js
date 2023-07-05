@@ -1,5 +1,5 @@
 const getToken = (req) => {
-  if(req.get('Cookie') === null){
+  if(!req.get('Cookie')){
     return null;
   }
   let cookies = req.get('Cookie').split(';');

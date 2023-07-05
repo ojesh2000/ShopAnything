@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const getToken = (req) => {
-  if(req.get('Cookie') === null){
+  if(!req.get('Cookie')){
     return null;
   }
   let cookies = req.get('Cookie').split(';');
@@ -22,7 +22,7 @@ exports.mid = async(req , res , next) => {
   let isEqual = jwt.verify(b , 'secret');
   let token = jwt.decode(b , 'secret');
   if(Date.now() > token.exp * 1000){
-    res.setHeader('Set-Cookie' , 'token=deleted; Max-Age=0 HttpOnly');
+    res.setHeader('Set-Cookie' , 'token=deleted; Max-Age=0; HttpOnly');
     return res.redirect('/');
   }
   if(!isEqual){

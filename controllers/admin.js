@@ -2,7 +2,7 @@ const Product = require('../models/product');
 const {  validationResult  } = require('express-validator');
 
 const getToken = (req) => {
-  if(req.get('Cookie') === null){
+  if(!req.get('Cookie')){
     return null;
   }
   let cookies = req.get('Cookie').split(';');
